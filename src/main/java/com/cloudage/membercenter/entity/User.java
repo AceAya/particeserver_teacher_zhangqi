@@ -11,31 +11,50 @@ public class User extends BaseEntity{
 	String passwordHash;
 	String name;
 	String avatar;
+	String email;
 
 	@Column(unique=true)
 	public String getAccount() {
 		return account;
 	}
+
+	@Column(nullable=false)
 	public String getPasswordHash() {
 		return passwordHash;
 	}
+
+	@Column(unique=true)
 	public String getName() {
 		return name;
 	}
+
+	@Column(nullable=true)
 	public String getAvatar() {
 		return avatar;
 	}
-	
+
+	@Column(nullable=false)
+	public String getEmail() {
+		return email;
+	}
+
 	public void setAccount(String account) {
 		this.account = account;
 	}
+
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public void setEmail(String email) {
+		this.email =email;
 	}
 }

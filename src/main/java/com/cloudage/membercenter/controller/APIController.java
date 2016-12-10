@@ -3,6 +3,7 @@ package com.cloudage.membercenter.controller;
 import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 
@@ -70,9 +71,9 @@ public class APIController {
 	
 	@RequestMapping(value="/me",method=RequestMethod.GET)
 	public User getCurrentUser(HttpServletRequest request){
-		Object obj =request.getSession().getAttribute("current_user");
+		Object obj=request.getSession().getAttribute("user");
 		if(obj instanceof User){
-			return(User)obj;
+			return (User)obj;
 		}else{
 			return null;
 		}

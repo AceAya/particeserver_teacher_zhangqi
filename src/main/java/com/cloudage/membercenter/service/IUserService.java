@@ -7,4 +7,6 @@ public interface IUserService {
 	User save(User user);
 
 	User findByAccount(String account);
+
+	
 }

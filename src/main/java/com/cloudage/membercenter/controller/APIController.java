@@ -5,6 +5,7 @@ import java.io.File;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,5 +54,28 @@ public class APIController {
 		return userService.save(user);
 	}
 	
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public User login(
+			@RequestParam String account,
+			@RequestParam String passwordHash,
+			HttpServletRequest request){
+		User user =userService.findByAccount(account);
+		if(user.getPasswordHash().equals(passwordHash)){
+			request.getSession().setAttribute("user",user);
+			return user;
+		}else{
+			return null;
+		}
+	}
+	
+	@RequestMapping(value="/me",method=RequestMethod.GET)
+	public User getCurrentUser(HttpServletRequest request){
+		Object obj =request.getSession().getAttribute("current_user");
+		if(obj instanceof User){
+			return(User)obj;
+		}else{
+			return null;
+		}
+	}
 
 }

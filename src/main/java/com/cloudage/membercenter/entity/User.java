@@ -33,7 +33,7 @@ public class User extends BaseEntity{
 		return avatar;
 	}
 
-	@Column(nullable=false)
+	@Column(nullable=false,unique=true)
 	public String getEmail() {
 		return email;
 	}

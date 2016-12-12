@@ -7,6 +7,8 @@ public interface IUserService {
 	User save(User user);
 
 	User findByAccount(String account);
+	User findByEmail(String email);
+	User fingById(Integer id);
 
 	
 }

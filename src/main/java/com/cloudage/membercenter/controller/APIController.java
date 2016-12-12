@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.io.FileUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -103,5 +104,18 @@ public class APIController {
 	public List<Article> getArticlesByUserID(@PathVariable Integer userId){
 		return articleService.findAllByAuthorId(userId);
 }
+	
+	@RequestMapping(value="/article", method=RequestMethod.POST)
+	public Article addArticle(
+			@RequestParam String title,
+			@RequestParam String text,
+			HttpServletRequest request){
+		User currentUser = getCurrentUser(request);
+			Article article = new Article();
+			article.setAuthor(currentUser);
+			article.setTitle(title);
+			article.setText(text);
+			return articleService.save(article);
+			}
 
 }
